@@ -7,6 +7,7 @@ import jwt from 'jsonwebtoken';
 
 
 export function userRegister (req,res) {
+
     const { phone,email,name,password } = req.body;
 
     if(!name){
@@ -54,7 +55,6 @@ export function userRegister (req,res) {
         email,
         phone,
         hashPass
-      
     ];
     db.query(user,values,(err,data)=>{
         if(err) return res.json(err)
@@ -69,7 +69,7 @@ export function userRegister (req,res) {
 export function userLogin (req,res){
     const { email ,password } = req.body;
 
-    if(!email){
+    if(!email){  
         return res.status(404).json({ message:"Email is requried"})
     }
     if(!password){
