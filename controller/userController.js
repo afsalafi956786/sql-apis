@@ -101,3 +101,32 @@ export function userLogin (req,res){
  
     })
 }
+
+
+export function getUser (req,res){
+    try{
+        const getUsers = "SELECT * FROM user";
+        db.query(getUsers,(err,data)=>{
+            if (err)  return res.status(500).json({ error: "Internal server error." });
+            return res.status(200).json({ users :data})
+        })
+    }catch(error){
+        console.log(error.message)
+        return res.status(500).json({ error: "Internal server error." });
+    }
+}
+
+
+export function GetVerifiedUser (req,res){
+    try{
+        const getVefiedUsers = "SELECT * FROM user WHERE kycVerification = 1";
+        db.query(getVefiedUsers,(err,data)=>{
+
+         if(err) return res.status(500).json({  error: "Internal server error." })
+
+            return res.status(200).json({ verifiedUsers :data})
+        })
+    }catch(error){
+        return res.status(500).json({ error: "Internal server error." });
+    }
+}
